@@ -1,0 +1,34 @@
+.Home_Team img {
+    max-width: 250px;
+    display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+ 
+  }
+
+  html * {
+    box-sizing: border-box;
+  }
+ 
+  .Team img {
+    max-width: 200px;
+  }
+  
+
+  button {
+    display: block;
+    margin-top: 1rem;
+    width: 145px;
+    padding: 0.5rem;
+    background-color:pink;
+    border: 0;
+    text-transform: uppercase;
+    box-shadow: 5px 2px 0 black;
+  }
+
+  .stats {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+  }

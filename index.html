@@ -30,34 +30,96 @@
 
     //An App component under which all other components will be added
     function App(props) {
+      const anime = {
+        name: 'AnimeWeebs',
+        logoSrc: './assets/animeweeb.png'
+      }
+
+      const Manga = {
+        name: 'Manga Weebs',
+        logoSrc: './assets/maga weeb.png'
+      }
+
+      const confused = {
+        name: 'Neitherers!',
+        logoSrc: './assets/Confused.jpg'
+      }
+
+
+      const nonanime = {
+        name: 'Bias',
+        logoSrc: './assets/nonanime.jpg'
+      }
+
+
+
       return (
         <div className='App'>
-          <div className='stats'>
-            <Home_Team
-              name="Anime Weebs"
-              logo="C:\Users\tim_t\Documents\react_sports_game\assets\animeweeb.jpeg"
-            />
-            <h1>VS</h1>
-            <Home_Team
-              name="Manga Weebs"
-              logo="C:\Users\tim_t\Documents\react_sports_game\assets\maga weeb.png"
-            />
+
+          <Game 
+          venue="Nioh"
+          hometeam={anime}
+          vistingteam={Manga} 
+          />
+
+          <Game 
+          venue="Seiko"
+          hometeam={confused}
+          vistingteam={nonanime} 
+          />
 
 
 
-          </div>
+
+
+
         </div>
       )
     }
+
+
+    function Game(props) {
+      return (
+        <div className='Game'>
+          <h2>Welcome To {props.venue}</h2>
+
+
+          <Home_Team
+            name={props.vistingteam.name}
+            logo={props.vistingteam.logoSrc} />
+
+          <div className="versus"></div>
+
+            <h1>VS</h1>
+          
+
+          <Home_Team
+            name={props.hometeam.name}
+            logo={props.hometeam.logoSrc} />
+
+
+
+
+        </div>
+
+
+
+
+
+      )
+    }
+
+
+
 
     class Home_Team extends React.Component {
       constructor(props) {
         super(props);
 
         this.state = {
-          Score: 0,
-          Shots: 0,
-          random: 0,
+          score: 0,
+          shots: 0,
+          //random: 0,
 
 
 
@@ -66,48 +128,69 @@
           // })
         }
 
-
+        this.shotsSound = new Audio('./assets/audio/boooo.mp3')
+        this.scoreSound = new Audio('./audio/applause9.mp3')
 
         //this.handleIncrement = this.handleIncrement.bind(this)
       }
 
-      playscore() {
-        const scoreSound = new Audio("./audio/boooo.mp3")
-        scoreSound.play()
-      }
+      //my version to play sounds
+      // playscore() {
+      //   const scoreSound = new Audio("./audio/boooo.mp3")
+      //   scoreSound.play()
+      // }
 
-      playshot() {
-        const shotSound = new Audio("./audio/applause9.mp3")
-        shotSound.play()
-      }
+      // playshot() {
+      //   const shotsSound = new Audio("./audio/applause9.mp3")
+      //   shostSound.play()
+      // }
 
 
 
 
+      // my version 
+      // Team1shoot = (event) => {
+      //   let score = this.state.score
+
+      //   this.setState((currentstate, props) => ({
+      //     Shots: currentstate.Shots + 1
+
+      //   }))
+
+      //   let random = Math.random()
+      //   if (random < 0.5) {
+      //     setTimeout(() => {
+      //       this.playshot()
+      //     }, 150)
+      //     this.setState((currentstate, props) => ({
+      //       Score: currentstate.Score += 1
+
+      //     }))
+
+
+      //   }
+      // }
 
       Team1shoot = (event) => {
         let score = this.state.score
-        
-        this.setState((currentstate, props) => ({
-          Shots: currentstate.Shots + 1
+        this.shotsSound.play()
+
+        if (Math.random() > 0.5) {
+          score += 1
+
+          setTimeout(() => {
+            this.scoreSound.play()
+          }, 100);
+        }
+
+        this.setState((state, props) => ({
+          shots: state.shots + 1,
+          score
+
+
 
         }))
-        
-        let random = Math.random()
-        if (random < 0.5  ) {
-          setTimeout(() =>{
-          this.playshot()
-        },150)
-          this.setState((currentstate, props) => ({
-            Score: currentstate.Score += 1
-
-          }))
-
-            
-        }
       }
-
-
 
 
 
@@ -116,29 +199,50 @@
 
 
       render() {
-        
+        let shotpercentdiv
+        if (this.state.shots) {
+          const shotpercent = Math.round((this.state.score / this.state.shots) * 100)
+          shotpercentdiv = (
+            <div>
+              <strong>Shoot % :{shotpercent}</strong>
+            </div>
+          )
+
+        }
+
+
         return (
           <div className="Home_Team">
-            <h2>{this.props.name}</h2>
-            <div className="Home_Team">
+
+            <div className="id">
               <img src={this.props.logo} alt={this.props.name} />
+
+
+              <h2>{this.props.name}</h2>
+
+
+              <button onClick={this.Team1shoot}><b>Shoot!</b></button>
+
+              <div>
+                <strong>Score:{this.state.score}</strong>
+              </div>
+
+              <div>
+                <strong>Shots:{this.state.shots}</strong>
+              </div>
+
+
+
+
+              {shotpercentdiv}
+
+
+
+
+
+
+
             </div>
-            <button onClick={this.Team1shoot}><p>Click Me:</p></button>
-             Score:{this.state.Score}
-            <div>Shots:
-            {this.state.Shots}
-            </div>
-            <div>Hello</div>
-
-
-
-
-
-
-
-
-
-
 
           </div>
 

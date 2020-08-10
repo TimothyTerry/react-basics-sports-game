@@ -1,7 +1,7 @@
 .Home_Team img {
     max-width: 250px;
     display: flex;
-  flex-direction: column;
+  flex-direction: row;
   align-items: center;
   justify-content: space-between;
  
@@ -11,20 +11,20 @@
     box-sizing: border-box;
   }
  
-  .Team img {
-    max-width: 200px;
-  }
+
   
 
   button {
     display: block;
     margin-top: 1rem;
-    width: 145px;
+  
     padding: 0.5rem;
-    background-color:pink;
+    background-color: #fc0;
     border: 0;
+    font-family: Oswald, sans-serif;
     text-transform: uppercase;
-    box-shadow: 5px 2px 0 black;
+    font-size: 1.2em;
+    box-shadow: 2px 2px 0 black;
   }
 
   .stats {
@@ -32,3 +32,16 @@
     justify-content: space-around;
     align-items: center;
   }
+
+  .versus {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.versus h1 {
+  font-family: againtsregular, oswald, sans-serif;
+  font-size: 500%;
+  color: #fc0;
+  text-shadow: 2px 2px 0 black;
+}
